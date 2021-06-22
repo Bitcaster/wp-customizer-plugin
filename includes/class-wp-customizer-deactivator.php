@@ -20,17 +20,18 @@
  * @subpackage Wp_Customizer/includes
  * @author     Your Name <email@example.com>
  */
-class Wp_Customizer_Deactivator {
+class Wp_Customizer_Deactivator
+{
 
-	/**
-	 * Short Description. (use period)
-	 *
-	 * Long Description.
-	 *
-	 * @since    1.0.0
-	 */
-	public static function deactivate() {
-
-	}
+    /**
+     * Short Description. (use period)
+     *
+     * Long Description.
+     *
+     * @since    1.0.0
+     */
+    public static function deactivate()
+    {
+    }
 
 }

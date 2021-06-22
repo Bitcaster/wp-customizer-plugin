@@ -11,6 +11,7 @@
  * @package    Wp_Customizer
  * @subpackage Wp_Customizer/public/partials
  */
+
 ?>
 
 <!-- This file should primarily consist of HTML with a little bit of PHP. -->
