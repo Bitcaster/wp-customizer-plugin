@@ -6,8 +6,8 @@
  * Loads and defines the internationalization files for this plugin
  * so that it is ready for translation.
  *
- * @link       http://example.com
- * @since      1.0.0
+ * @link       https://bitcaster.de
+ * @since      1.0.1
  *
  * @package    Wp_Customizer
  * @subpackage Wp_Customizer/includes
@@ -19,10 +19,10 @@
  * Loads and defines the internationalization files for this plugin
  * so that it is ready for translation.
  *
- * @since      1.0.0
+ * @since      1.0.1
  * @package    Wp_Customizer
  * @subpackage Wp_Customizer/includes
- * @author     Your Name <email@example.com>
+ * @author     Bitcaster GmbH <info@bitcaster.de>
  */
 class Wp_Customizer_i18n
 {
@@ -31,7 +31,7 @@ class Wp_Customizer_i18n
     /**
      * Load the plugin text domain for translation.
      *
-     * @since    1.0.0
+     * @since    1.0.1
      */
     public function load_plugin_textdomain()
     {

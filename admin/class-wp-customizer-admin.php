@@ -3,8 +3,8 @@
 /**
  * The admin-specific functionality of the plugin.
  *
- * @link       http://example.com
- * @since      1.0.0
+ * @link       https://bitcaster.de
+ * @since      1.0.1
  *
  * @package    Wp_Customizer
  * @subpackage Wp_Customizer/admin
@@ -18,7 +18,7 @@
  *
  * @package    Wp_Customizer
  * @subpackage Wp_Customizer/admin
- * @author     Your Name <email@example.com>
+ * @author     Bitcaster GmbH <info@bitcaster.de>
  */
 class Wp_Customizer_Admin
 {
@@ -26,7 +26,7 @@ class Wp_Customizer_Admin
     /**
      * The ID of this plugin.
      *
-     * @since    1.0.0
+     * @since    1.0.1
      * @access   private
      * @var      string $wp_customizer The ID of this plugin.
      */
@@ -35,7 +35,7 @@ class Wp_Customizer_Admin
     /**
      * The version of this plugin.
      *
-     * @since    1.0.0
+     * @since    1.0.1
      * @access   private
      * @var      string $version The current version of this plugin.
      */
@@ -46,7 +46,7 @@ class Wp_Customizer_Admin
      *
      * @param string $wp_customizer The name of this plugin.
      * @param string $version The version of this plugin.
-     * @since    1.0.0
+     * @since    1.0.1
      */
     public function __construct($wp_customizer, $version)
     {
@@ -57,7 +57,7 @@ class Wp_Customizer_Admin
     /**
      * Register the stylesheets for the admin area.
      *
-     * @since    1.0.0
+     * @since    1.0.1
      */
     public function enqueue_styles()
     {
@@ -85,7 +85,7 @@ class Wp_Customizer_Admin
     /**
      * Register the JavaScript for the admin area.
      *
-     * @since    1.0.0
+     * @since    1.0.1
      */
     public function enqueue_scripts()
     {

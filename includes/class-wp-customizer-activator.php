@@ -3,8 +3,8 @@
 /**
  * Fired during plugin activation
  *
- * @link       http://example.com
- * @since      1.0.0
+ * @link       https://bitcaster.de
+ * @since      1.0.1
  *
  * @package    Wp_Customizer
  * @subpackage Wp_Customizer/includes
@@ -15,10 +15,10 @@
  *
  * This class defines all code necessary to run during the plugin's activation.
  *
- * @since      1.0.0
+ * @since      1.0.1
  * @package    Wp_Customizer
  * @subpackage Wp_Customizer/includes
- * @author     Your Name <email@example.com>
+ * @author     Bitcaster GmbH <info@bitcaster.de>
  */
 class Wp_Customizer_Activator
 {
@@ -28,7 +28,7 @@ class Wp_Customizer_Activator
      *
      * Long Description.
      *
-     * @since    1.0.0
+     * @since    1.0.1
      */
     public static function activate()
     {

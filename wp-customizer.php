@@ -8,17 +8,17 @@
  * registers the activation and deactivation functions, and defines a function
  * that starts the plugin.
  *
- * @link              http://example.com
- * @since             1.0.0
+ * @link              https://bitcaster.de
+ * @since             1.0.1
  * @package           Wp_Customizer
  *
  * @wordpress-plugin
- * Plugin Name:       WordPress Plugin Boilerplate
- * Plugin URI:        http://example.com/wp-customizer-uri/
+ * Plugin Name:       Bitcaster WP Customizer
+ * Plugin URI:        https://github.com/Bitcaster/wp-customizer-plugin
  * Description:       This is a short description of what the plugin does. It's displayed in the WordPress admin area.
- * Version:           1.0.0
- * Author:            Your Name or Your Company
- * Author URI:        http://example.com/
+ * Version:           1.0.1
+ * Author:            Bitcaster GmbH
+ * Author URI:        https://bitcaster.de/
  * License:           GPL-2.0+
  * License URI:       http://www.gnu.org/licenses/gpl-2.0.txt
  * Text Domain:       wp-customizer
@@ -73,7 +73,7 @@ require plugin_dir_path(__FILE__) . 'includes/class-wp-customizer.php';
  * then kicking off the plugin from this point in the file does
  * not affect the page life cycle.
  *
- * @since    1.0.0
+ * @since    1.0.1
  */
 function run_wp_customizer()
 {

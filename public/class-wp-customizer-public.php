@@ -3,8 +3,8 @@
 /**
  * The public-facing functionality of the plugin.
  *
- * @link       http://example.com
- * @since      1.0.0
+ * @link       https://bitcaster.de
+ * @since      1.0.1
  *
  * @package    Wp_Customizer
  * @subpackage Wp_Customizer/public
@@ -18,7 +18,7 @@
  *
  * @package    Wp_Customizer
  * @subpackage Wp_Customizer/public
- * @author     Your Name <email@example.com>
+ * @author     Bitcaster GmbH <info@bitcaster.de>
  */
 class Wp_Customizer_Public
 {
@@ -26,7 +26,7 @@ class Wp_Customizer_Public
     /**
      * The ID of this plugin.
      *
-     * @since    1.0.0
+     * @since    1.0.1
      * @access   private
      * @var      string $wp_customizer The ID of this plugin.
      */
@@ -35,7 +35,7 @@ class Wp_Customizer_Public
     /**
      * The version of this plugin.
      *
-     * @since    1.0.0
+     * @since    1.0.1
      * @access   private
      * @var      string $version The current version of this plugin.
      */
@@ -46,7 +46,7 @@ class Wp_Customizer_Public
      *
      * @param string $wp_customizer The name of the plugin.
      * @param string $version The version of this plugin.
-     * @since    1.0.0
+     * @since    1.0.1
      */
     public function __construct($wp_customizer, $version)
     {
@@ -57,7 +57,7 @@ class Wp_Customizer_Public
     /**
      * Register the stylesheets for the public-facing side of the site.
      *
-     * @since    1.0.0
+     * @since    1.0.1
      */
     public function enqueue_styles()
     {
@@ -85,7 +85,7 @@ class Wp_Customizer_Public
     /**
      * Register the JavaScript for the public-facing side of the site.
      *
-     * @since    1.0.0
+     * @since    1.0.1
      */
     public function enqueue_scripts()
     {
