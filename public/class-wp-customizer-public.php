@@ -109,5 +109,4 @@ class Wp_Customizer_Public
             false
         );
     }
-
 }
