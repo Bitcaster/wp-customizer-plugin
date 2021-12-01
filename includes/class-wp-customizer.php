@@ -7,7 +7,7 @@
  * public-facing side of the site and the admin area.
  *
  * @link       https://bitcaster.de
- * @since      1.0.1
+ * @since      1.0.2
  *
  * @package    Wp_Customizer
  * @subpackage Wp_Customizer/includes
@@ -22,7 +22,7 @@
  * Also maintains the unique identifier of this plugin as well as the current
  * version of the plugin.
  *
- * @since      1.0.1
+ * @since      1.0.2
  * @package    Wp_Customizer
  * @subpackage Wp_Customizer/includes
  * @author     Bitcaster GmbH <info@bitcaster.de>
@@ -34,7 +34,7 @@ class Wp_Customizer
      * The loader that's responsible for maintaining and registering all hooks that power
      * the plugin.
      *
-     * @since    1.0.1
+     * @since    1.0.2
      * @access   protected
      * @var      Wp_Customizer_Loader $loader Maintains and registers all hooks for the plugin.
      */
@@ -43,7 +43,7 @@ class Wp_Customizer
     /**
      * The unique identifier of this plugin.
      *
-     * @since    1.0.1
+     * @since    1.0.2
      * @access   protected
      * @var      string $wp_customizer The string used to uniquely identify this plugin.
      */
@@ -52,7 +52,7 @@ class Wp_Customizer
     /**
      * The current version of the plugin.
      *
-     * @since    1.0.1
+     * @since    1.0.2
      * @access   protected
      * @var      string $version The current version of the plugin.
      */
@@ -65,7 +65,7 @@ class Wp_Customizer
      * Load the dependencies, define the locale, and set the hooks for the admin area and
      * the public-facing side of the site.
      *
-     * @since    1.0.1
+     * @since    1.0.2
      */
     public function __construct()
     {
@@ -80,6 +80,7 @@ class Wp_Customizer
         $this->set_locale();
         $this->define_admin_hooks();
         $this->define_public_hooks();
+        $this->define_api_hooks();
     }
 
     /**
@@ -95,7 +96,7 @@ class Wp_Customizer
      * Create an instance of the loader which will be used to register the hooks
      * with WordPress.
      *
-     * @since    1.0.1
+     * @since    1.0.2
      * @access   private
      */
     private function load_dependencies()
@@ -123,6 +124,12 @@ class Wp_Customizer
          */
         require_once plugin_dir_path(dirname(__FILE__)) . 'public/class-wp-customizer-public.php';
 
+        /**
+         * The class responsible for defining all actions that occur in the api
+         * side of the site.
+         */
+        require_once plugin_dir_path(dirname(__FILE__)) . 'api/class-wp-customizer-api.php';
+
         $this->loader = new Wp_Customizer_Loader();
     }
 
@@ -132,7 +139,7 @@ class Wp_Customizer
      * Uses the Wp_Customizer_i18n class in order to set the domain and to register the hook
      * with WordPress.
      *
-     * @since    1.0.1
+     * @since    1.0.2
      * @access   private
      */
     private function set_locale()
@@ -146,7 +153,7 @@ class Wp_Customizer
      * Register all of the hooks related to the admin area functionality
      * of the plugin.
      *
-     * @since    1.0.1
+     * @since    1.0.2
      * @access   private
      */
     private function define_admin_hooks()
@@ -155,9 +162,6 @@ class Wp_Customizer
 
         $this->loader->add_action('admin_enqueue_scripts', $plugin_admin, 'enqueue_styles');
         $this->loader->add_action('admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts');
-
-        //$this->loader->add_action('rest_api_init', $plugin_admin, 'setup_cors');
-        //$this->loader->add_action('init', $plugin_admin, 'add_cors_http_header');
     }
 
     /**
@@ -187,7 +191,7 @@ class Wp_Customizer
      * Register all of the hooks related to the public-facing functionality
      * of the plugin.
      *
-     * @since    1.0.1
+     * @since    1.0.2
      * @access   private
      */
     private function define_public_hooks()
@@ -199,9 +203,23 @@ class Wp_Customizer
     }
 
     /**
+     * Register all of the hooks related to the public-facing functionality
+     * of the plugin.
+     *
+     * @since    1.0.2
+     * @access   private
+     */
+    private function define_api_hooks()
+    {
+        $plugin_api = new Wp_Customizer_Api($this->get_wp_customizer(), $this->get_version());
+
+        $this->loader->add_filter('woocommerce_rest_check_permissions', $plugin_api, 'validate_woo_customer_request');
+    }
+
+    /**
      * Run the loader to execute all of the hooks with WordPress.
      *
-     * @since    1.0.1
+     * @since    1.0.2
      */
     public function run()
     {

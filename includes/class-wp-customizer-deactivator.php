@@ -4,7 +4,7 @@
  * Fired during plugin deactivation
  *
  * @link       https://bitcaster.de
- * @since      1.0.1
+ * @since      1.0.2
  *
  * @package    Wp_Customizer
  * @subpackage Wp_Customizer/includes
@@ -15,7 +15,7 @@
  *
  * This class defines all code necessary to run during the plugin's deactivation.
  *
- * @since      1.0.1
+ * @since      1.0.2
  * @package    Wp_Customizer
  * @subpackage Wp_Customizer/includes
  * @author     Bitcaster GmbH <info@bitcaster.de>
@@ -28,7 +28,7 @@ class Wp_Customizer_Deactivator
      *
      * Long Description.
      *
-     * @since    1.0.1
+     * @since    1.0.2
      */
     public static function deactivate()
     {
