@@ -110,43 +110,4 @@ class Wp_Customizer_Admin
         );
     }
 
-    public function setup_cors()
-    {
-        remove_filter('rest_pre_serve_request', 'rest_send_cors_headers');
-        add_filter(
-            'rest_pre_serve_request',
-            function ($value) {
-                $origin = get_http_origin();
-                $allowed_origins = [
-                    'https://local.omicron.bitcaster.dev',
-                    'https://omicron.bitcaster.dev',
-                    'https://app-omicron.bitcaster.dev:3337'
-                ];
-                if ($origin && in_array($origin, $allowed_origins)) {
-                    header('Access-Control-Allow-Origin: ' . esc_url_raw($origin));
-                    header('Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS, HEAD');
-                    header('Access-Control-Allow-Credentials: true');
-                }
-                return $value;
-            }
-        );
-    }
-
-    function add_cors_http_header(){
-        $origin = get_http_origin() ?? '*';
-        $allowed_origins = [
-            '*',
-            'https://local.omicron.bitcaster.dev',
-            'https://omicron.bitcaster.dev',
-            'https://app-omicron.bitcaster.dev:3337'
-        ];
-        if ($origin && in_array($origin, $allowed_origins)) {
-            header('Access-Control-Allow-Origin: ' . $origin);
-            header( 'Access-Control-Allow-Methods: GET,HEAD,OPTIONS,POST,PUT' );
-            header( 'Access-Control-Allow-Credentials: true' );
-            header( 'Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept, Authorization' );
-            header( 'Access-Control-Expose-Headers: Link', false );
-        }
-    }
-
 }
