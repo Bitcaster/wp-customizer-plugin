@@ -213,7 +213,9 @@ class Wp_Customizer
     {
         $plugin_api = new Wp_Customizer_Api($this->get_wp_customizer(), $this->get_version());
 
-        $this->loader->add_filter('woocommerce_rest_check_permissions', $plugin_api, 'validate_woo_customer_request');
+        $this->loader->add_filter('woocommerce_rest_check_permissions', $plugin_api, 'validate_woocommerce_rest_check_permissions', 10, 4);
+        $this->loader->add_filter('woocommerce_rest_orders_prepare_object_query', $plugin_api, 'validate_woocommerce_rest_orders_prepare_object_query', 10, 2);
+
     }
 
     /**
