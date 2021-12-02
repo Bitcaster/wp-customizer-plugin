@@ -4,7 +4,7 @@
  * The public-facing functionality of the plugin.
  *
  * @link       https://bitcaster.de
- * @since      1.0.3
+ * @since      1.0.4
  *
  * @package    Wp_Customizer
  * @subpackage Wp_Customizer/public
@@ -26,7 +26,7 @@ class Wp_Customizer_Api
     /**
      * The ID of this plugin.
      *
-     * @since    1.0.3
+     * @since    1.0.2
      * @access   private
      * @var      string $wp_customizer The ID of this plugin.
      */
@@ -35,7 +35,7 @@ class Wp_Customizer_Api
     /**
      * The version of this plugin.
      *
-     * @since    1.0.3
+     * @since    1.0.2
      * @access   private
      * @var      string $version The current version of this plugin.
      */
@@ -46,7 +46,7 @@ class Wp_Customizer_Api
      *
      * @param string $wp_customizer The name of the plugin.
      * @param string $version The version of this plugin.
-     * @since    1.0.3
+     * @since    1.0.2
      */
     public function __construct($wp_customizer, $version)
     {
@@ -77,12 +77,10 @@ class Wp_Customizer_Api
                     $result = true;
                 }
             } elseif ($objectType === 'shop_order') {
-                if (($customerId = get_query_var('customer')) && $customerId) {
-                    /** @var WP_User $currentUser */
-                    $currentUser = wp_get_current_user();
-                    if ($currentUser->ID === (int)$customerId) {
-                        $result = true;
-                    }
+                /** @var WP_User $currentUser */
+                $currentUser = wp_get_current_user();
+                if ($currentUser->ID) {
+                    $result = true;
                 }
             }
         }
