@@ -4,7 +4,7 @@
  * The public-facing functionality of the plugin.
  *
  * @link       https://bitcaster.de
- * @since      1.0.4
+ * @since      1.0.5
  *
  * @package    Wp_Customizer
  * @subpackage Wp_Customizer/public
@@ -26,7 +26,7 @@ class Wp_Customizer_Api
     /**
      * The ID of this plugin.
      *
-     * @since    1.0.2
+     * @since    1.0.5
      * @access   private
      * @var      string $wp_customizer The ID of this plugin.
      */
@@ -35,7 +35,7 @@ class Wp_Customizer_Api
     /**
      * The version of this plugin.
      *
-     * @since    1.0.2
+     * @since    1.0.5
      * @access   private
      * @var      string $version The current version of this plugin.
      */
@@ -46,7 +46,7 @@ class Wp_Customizer_Api
      *
      * @param string $wp_customizer The name of the plugin.
      * @param string $version The version of this plugin.
-     * @since    1.0.2
+     * @since    1.0.5
      */
     public function __construct($wp_customizer, $version)
     {
@@ -64,7 +64,10 @@ class Wp_Customizer_Api
             $supportedObjectTypesAndMethods =
                 [
                     'user' => ['read', 'edit'],
-                    'shop_order' => ['read']
+                    'shop_order' => ['read', 'create'],
+                    'product' => ['read'],
+                    'taxes' => ['read'],
+                    'settings' => ['read'],
                 ];
         }
         if (!$result && in_array($objectType, array_keys($supportedObjectTypesAndMethods))
@@ -77,6 +80,24 @@ class Wp_Customizer_Api
                     $result = true;
                 }
             } elseif ($objectType === 'shop_order') {
+                /** @var WP_User $currentUser */
+                $currentUser = wp_get_current_user();
+                if ($currentUser->ID) {
+                    $result = true;
+                }
+            } elseif ($objectType === 'product') {
+                /** @var WP_User $currentUser */
+                $currentUser = wp_get_current_user();
+                if ($currentUser->ID) {
+                    $result = true;
+                }
+            } elseif ($objectType === 'taxes') {
+                /** @var WP_User $currentUser */
+                $currentUser = wp_get_current_user();
+                if ($currentUser->ID) {
+                    $result = true;
+                }
+            } elseif ($objectType === 'settings') {
                 /** @var WP_User $currentUser */
                 $currentUser = wp_get_current_user();
                 if ($currentUser->ID) {
