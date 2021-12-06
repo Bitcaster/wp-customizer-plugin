@@ -4,7 +4,7 @@
  * Fired during plugin activation
  *
  * @link       https://bitcaster.de
- * @since      1.0.5
+ * @since      1.0.6
  *
  * @package    Wp_Customizer
  * @subpackage Wp_Customizer/includes
@@ -15,7 +15,7 @@
  *
  * This class defines all code necessary to run during the plugin's activation.
  *
- * @since      1.0.5
+ * @since      1.0.6
  * @package    Wp_Customizer
  * @subpackage Wp_Customizer/includes
  * @author     Bitcaster GmbH <info@bitcaster.de>
@@ -28,7 +28,7 @@ class Wp_Customizer_Activator
      *
      * Long Description.
      *
-     * @since    1.0.5
+     * @since    1.0.6
      */
     public static function activate()
     {

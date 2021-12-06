@@ -4,7 +4,7 @@
  * The public-facing functionality of the plugin.
  *
  * @link       https://bitcaster.de
- * @since      1.0.5
+ * @since      1.0.6
  *
  * @package    Wp_Customizer
  * @subpackage Wp_Customizer/public
@@ -26,29 +26,29 @@ class Wp_Customizer_Public
     /**
      * The ID of this plugin.
      *
-     * @since    1.0.5
+     * @since    1.0.6
      * @access   private
      * @var      string $wp_customizer The ID of this plugin.
      */
-    private $wp_customizer;
+    private string $wp_customizer;
 
     /**
      * The version of this plugin.
      *
-     * @since    1.0.5
+     * @since    1.0.6
      * @access   private
      * @var      string $version The current version of this plugin.
      */
-    private $version;
+    private string $version;
 
     /**
      * Initialize the class and set its properties.
      *
      * @param string $wp_customizer The name of the plugin.
      * @param string $version The version of this plugin.
-     * @since    1.0.5
+     * @since    1.0.6
      */
-    public function __construct($wp_customizer, $version)
+    public function __construct(string $wp_customizer,string $version)
     {
         $this->wp_customizer = $wp_customizer;
         $this->version = $version;
@@ -57,7 +57,7 @@ class Wp_Customizer_Public
     /**
      * Register the stylesheets for the public-facing side of the site.
      *
-     * @since    1.0.5
+     * @since    1.0.6
      */
     public function enqueue_styles()
     {
@@ -77,15 +77,14 @@ class Wp_Customizer_Public
             $this->wp_customizer,
             plugin_dir_url(__FILE__) . 'css/wp-customizer-public.css',
             [],
-            $this->version,
-            'all'
+            $this->version
         );
     }
 
     /**
      * Register the JavaScript for the public-facing side of the site.
      *
-     * @since    1.0.5
+     * @since    1.0.6
      */
     public function enqueue_scripts()
     {
@@ -105,8 +104,7 @@ class Wp_Customizer_Public
             $this->wp_customizer,
             plugin_dir_url(__FILE__) . 'js/wp-customizer-public.js',
             ['jquery'],
-            $this->version,
-            false
+            $this->version
         );
     }
 

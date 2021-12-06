@@ -6,7 +6,7 @@
  * This file is used to markup the public-facing aspects of the plugin.
  *
  * @link       https://bitcaster.de
- * @since      1.0.5
+ * @since      1.0.6
  *
  * @package    Wp_Customizer
  * @subpackage Wp_Customizer/public/partials
