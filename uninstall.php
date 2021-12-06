@@ -20,7 +20,7 @@
  * https://github.com/tommcfarlin/WordPress-Plugin-Boilerplate/pull/123#issuecomment-28541913
  *
  * @link       https://bitcaster.de
- * @since      1.0.6
+ * @since      1.0.7
  *
  * @package    Wp_Customizer
  */

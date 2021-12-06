@@ -4,7 +4,7 @@
  * The public-facing functionality of the plugin.
  *
  * @link       https://bitcaster.de
- * @since      1.0.6
+ * @since      1.0.7
  *
  * @package    Wp_Customizer
  * @subpackage Wp_Customizer/public
@@ -55,7 +55,7 @@ class Wp_Customizer_Api
     /**
      * The ID of this plugin.
      *
-     * @since    1.0.6
+     * @since    1.0.7
      * @access   private
      * @var      string $wp_customizer The ID of this plugin.
      */
@@ -64,7 +64,7 @@ class Wp_Customizer_Api
     /**
      * The version of this plugin.
      *
-     * @since    1.0.6
+     * @since    1.0.7
      * @access   private
      * @var      string $version The current version of this plugin.
      */
@@ -75,7 +75,7 @@ class Wp_Customizer_Api
      *
      * @param string $wp_customizer The name of the plugin.
      * @param string $version The version of this plugin.
-     * @since    1.0.6
+     * @since    1.0.7
      */
     public function __construct(string $wp_customizer, string $version)
     {
@@ -350,9 +350,12 @@ class Wp_Customizer_Api
     {
         global $wp;
         if (is_checkout() && !empty($wp->query_vars['order-received'])) {
-            wp_redirect(
-                'https://app-omicron.bitcaster.dev:3337/order-success?order_id=' . $wp->query_vars['order-received']
-            );
+            if (($frontendUrl = $this->getFrontendUrl()) && $frontendUrl) {
+                $url = $frontendUrl . '/order-success?order_id=' . $wp->query_vars['order-received'];
+            } else {
+                $url = 'https://app-omicron.bitcaster.dev:3337/order-success?order_id=' . $wp->query_vars['order-received'];
+            }
+            wp_redirect($url);
             exit;
         }
     }
@@ -383,13 +386,31 @@ class Wp_Customizer_Api
      */
     private function changeUrl(array $data): array
     {
-        $customizerOptions = get_option('bitcaster_wp_customizer_plugin_options');
-        if (isset($customizerOptions['frontend_url'], $customizerOptions['backend_url'])
-            && ($frontendUrl = $customizerOptions['frontend_url']) && $frontendUrl
-            && ($backendUrl = $customizerOptions['backend_url']) && $backendUrl
+        if (($frontendUrl = $this->getFrontendUrl()) && $frontendUrl
+            && ($backendUrl = $this->getBackendUrl()) && $backendUrl
             && isset($data['url'])) {
             $data['url'] = str_replace($backendUrl, $frontendUrl, $data['url']);
         }
         return $data;
+    }
+
+    private function getFrontendUrl(): ?string
+    {
+        $customizerOptions = get_option('bitcaster_wp_customizer_plugin_options');
+        if (isset($customizerOptions['frontend_url'])
+            && ($frontendUrl = $customizerOptions['frontend_url']) && $frontendUrl) {
+            return $frontendUrl;
+        }
+        return null;
+    }
+
+    private function getBackendUrl(): ?string
+    {
+        $customizerOptions = get_option('bitcaster_wp_customizer_plugin_options');
+        if (isset($customizerOptions['backend_url'])
+            && ($backendUrl = $customizerOptions['backend_url']) && $backendUrl) {
+            return $backendUrl;
+        }
+        return null;
     }
 }
