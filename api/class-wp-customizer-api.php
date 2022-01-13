@@ -343,6 +343,25 @@ class Wp_Customizer_Api
             ],
         ];
 
+        $meta_boxes[] = [
+            'title' => esc_html__('Language', 'online-generator'),
+            'id' => 'language-group',
+            'post_types' => ['tribe_events'],
+            'context' => 'normal',
+            'fields' => [
+                [
+                    'type' => 'radio',
+                    'name' => esc_html__('Language', 'online-generator'),
+                    'id' => $prefix . 'lang',
+                    'options' => [
+                        'de' => esc_html__('Deutsch', 'online-generator'),
+                        'en' => esc_html__('Englisch', 'online-generator'),
+                    ],
+                    'std' => 'de',
+                ],
+            ],
+        ];
+
         return $meta_boxes;
     }
 
