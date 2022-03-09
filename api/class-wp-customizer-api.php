@@ -4,7 +4,7 @@
  * The public-facing functionality of the plugin.
  *
  * @link       https://bitcaster.de
- * @since      1.0.8
+ * @since      1.0.9
  *
  * @package    Wp_Customizer
  * @subpackage Wp_Customizer/public
@@ -55,7 +55,7 @@ class Wp_Customizer_Api
     /**
      * The ID of this plugin.
      *
-     * @since    1.0.8
+     * @since    1.0.9
      * @access   private
      * @var      string $wp_customizer The ID of this plugin.
      */
@@ -64,7 +64,7 @@ class Wp_Customizer_Api
     /**
      * The version of this plugin.
      *
-     * @since    1.0.8
+     * @since    1.0.9
      * @access   private
      * @var      string $version The current version of this plugin.
      */
@@ -75,7 +75,7 @@ class Wp_Customizer_Api
      *
      * @param string $wp_customizer The name of the plugin.
      * @param string $version The version of this plugin.
-     * @since    1.0.8
+     * @since    1.0.9
      */
     public function __construct(string $wp_customizer, string $version)
     {
@@ -339,25 +339,6 @@ class Wp_Customizer_Api
                     'attributes' => [
                         'private' => false,
                     ],
-                ],
-            ],
-        ];
-
-        $meta_boxes[] = [
-            'title' => esc_html__('Language', 'online-generator'),
-            'id' => 'language-group',
-            'post_types' => ['tribe_events'],
-            'context' => 'normal',
-            'fields' => [
-                [
-                    'type' => 'radio',
-                    'name' => esc_html__('Language', 'online-generator'),
-                    'id' => $prefix . 'lang',
-                    'options' => [
-                        'de' => esc_html__('Deutsch', 'online-generator'),
-                        'en' => esc_html__('Englisch', 'online-generator'),
-                    ],
-                    'std' => 'de',
                 ],
             ],
         ];

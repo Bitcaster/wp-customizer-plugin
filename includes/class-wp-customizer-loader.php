@@ -4,7 +4,7 @@
  * Register all actions and filters for the plugin
  *
  * @link       https://bitcaster.de
- * @since      1.0.8
+ * @since      1.0.9
  *
  * @package    Wp_Customizer
  * @subpackage Wp_Customizer/includes
@@ -27,7 +27,7 @@ class Wp_Customizer_Loader
     /**
      * The array of actions registered with WordPress.
      *
-     * @since    1.0.8
+     * @since    1.0.9
      * @access   protected
      * @var      array $actions The actions registered with WordPress to fire when the plugin loads.
      */
@@ -36,7 +36,7 @@ class Wp_Customizer_Loader
     /**
      * The array of filters registered with WordPress.
      *
-     * @since    1.0.8
+     * @since    1.0.9
      * @access   protected
      * @var      array $filters The filters registered with WordPress to fire when the plugin loads.
      */
@@ -45,7 +45,7 @@ class Wp_Customizer_Loader
     /**
      * Initialize the collections used to maintain the actions and filters.
      *
-     * @since    1.0.8
+     * @since    1.0.9
      */
     public function __construct()
     {
@@ -61,7 +61,7 @@ class Wp_Customizer_Loader
      * @param string $callback The name of the function definition on the $component.
      * @param int $priority Optional. The priority at which the function should be fired. Default is 10.
      * @param int $accepted_args Optional. The number of arguments that should be passed to the $callback. Default is 1.
-     * @since    1.0.8
+     * @since    1.0.9
      */
     public function add_action(
         string $hook,
@@ -84,7 +84,7 @@ class Wp_Customizer_Loader
      * @param int $priority The priority at which the function should be fired.
      * @param int $accepted_args The number of arguments that should be passed to the $callback.
      * @return   array                                  The collection of actions and filters registered with WordPress.
-     * @since    1.0.8
+     * @since    1.0.9
      * @access   private
      */
     private function add(
@@ -114,7 +114,7 @@ class Wp_Customizer_Loader
      * @param string $callback The name of the function definition on the $component.
      * @param int $priority Optional. The priority at which the function should be fired. Default is 10.
      * @param int $accepted_args Optional. The number of arguments that should be passed to the $callback. Default is 1
-     * @since    1.0.8
+     * @since    1.0.9
      */
     public function add_filter(
         string $hook,
@@ -129,7 +129,7 @@ class Wp_Customizer_Loader
     /**
      * Register the filters and actions with WordPress.
      *
-     * @since    1.0.8
+     * @since    1.0.9
      */
     public function run()
     {
