@@ -4,7 +4,7 @@
  * The public-facing functionality of the plugin.
  *
  * @link       https://bitcaster.de
- * @since      1.1.0
+ * @since      1.1.1
  *
  * @package    Wp_Customizer
  * @subpackage Wp_Customizer/public
@@ -55,7 +55,7 @@ class Wp_Customizer_Api
     /**
      * The ID of this plugin.
      *
-     * @since    1.1.0
+     * @since    1.1.1
      * @access   private
      * @var      string $wp_customizer The ID of this plugin.
      */
@@ -64,7 +64,7 @@ class Wp_Customizer_Api
     /**
      * The version of this plugin.
      *
-     * @since    1.1.0
+     * @since    1.1.1
      * @access   private
      * @var      string $version The current version of this plugin.
      */
@@ -75,7 +75,7 @@ class Wp_Customizer_Api
      *
      * @param string $wp_customizer The name of the plugin.
      * @param string $version The version of this plugin.
-     * @since    1.1.0
+     * @since    1.1.1
      */
     public function __construct(string $wp_customizer, string $version)
     {
@@ -221,7 +221,7 @@ class Wp_Customizer_Api
 
     public function add_event_review_fields(): void
     {
-        $fields = ['review', 'rating'];
+        $fields = ['review', 'rating', 'email'];
         foreach ($fields as $field) {
             register_rest_field(
                 'event_review',
@@ -393,6 +393,11 @@ class Wp_Customizer_Api
                     'id' => $prefix . 'review',
                     'rows' => 3,
                 ],
+                [
+                    'type' => 'text',
+                    'name' => esc_html__('Email', 'online-generator'),
+                    'id' => $prefix . 'email'
+                ]
             ],
         ];
 

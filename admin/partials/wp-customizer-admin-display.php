@@ -6,7 +6,7 @@
  * This file is used to markup the admin-facing aspects of the plugin.
  *
  * @link       https://bitcaster.de
- * @since      1.1.0
+ * @since      1.1.1
  *
  * @package    Wp_Customizer
  * @subpackage Wp_Customizer/admin/partials
