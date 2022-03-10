@@ -7,7 +7,7 @@
  * public-facing side of the site and the admin area.
  *
  * @link       https://bitcaster.de
- * @since      1.0.9
+ * @since      1.1.0
  *
  * @package    Wp_Customizer
  * @subpackage Wp_Customizer/includes
@@ -22,7 +22,7 @@
  * Also maintains the unique identifier of this plugin as well as the current
  * version of the plugin.
  *
- * @since      1.0.9
+ * @since      1.1.0
  * @package    Wp_Customizer
  * @subpackage Wp_Customizer/includes
  * @author     Bitcaster GmbH <info@bitcaster.de>
@@ -34,7 +34,7 @@ class Wp_Customizer
      * The loader that's responsible for maintaining and registering all hooks that power
      * the plugin.
      *
-     * @since    1.0.9
+     * @since    1.1.0
      * @access   protected
      * @var      Wp_Customizer_Loader $loader Maintains and registers all hooks for the plugin.
      */
@@ -43,7 +43,7 @@ class Wp_Customizer
     /**
      * The unique identifier of this plugin.
      *
-     * @since    1.0.9
+     * @since    1.1.0
      * @access   protected
      * @var      string $wp_customizer The string used to uniquely identify this plugin.
      */
@@ -52,7 +52,7 @@ class Wp_Customizer
     /**
      * The current version of the plugin.
      *
-     * @since    1.0.9
+     * @since    1.1.0
      * @access   protected
      * @var      string $version The current version of the plugin.
      */
@@ -65,7 +65,7 @@ class Wp_Customizer
      * Load the dependencies, define the locale, and set the hooks for the admin area and
      * the public-facing side of the site.
      *
-     * @since    1.0.9
+     * @since    1.1.0
      */
     public function __construct()
     {
@@ -96,7 +96,7 @@ class Wp_Customizer
      * Create an instance of the loader which will be used to register the hooks
      * with WordPress.
      *
-     * @since    1.0.9
+     * @since    1.1.0
      * @access   private
      */
     private function load_dependencies()
@@ -139,7 +139,7 @@ class Wp_Customizer
      * Uses the Wp_Customizer_i18n class in order to set the domain and to register the hook
      * with WordPress.
      *
-     * @since    1.0.9
+     * @since    1.1.0
      * @access   private
      */
     private function set_locale()
@@ -153,7 +153,7 @@ class Wp_Customizer
      * Register all of the hooks related to the admin area functionality
      * of the plugin.
      *
-     * @since    1.0.9
+     * @since    1.1.0
      * @access   private
      */
     private function define_admin_hooks()
@@ -171,7 +171,7 @@ class Wp_Customizer
      * WordPress and to define internationalization functionality.
      *
      * @return    string    The name of the plugin.
-     * @since     1.0.9
+     * @since     1.1.0
      */
     public function get_wp_customizer(): string
     {
@@ -182,7 +182,7 @@ class Wp_Customizer
      * Retrieve the version number of the plugin.
      *
      * @return    string    The version number of the plugin.
-     * @since     1.0.9
+     * @since     1.1.0
      */
     public function get_version(): string
     {
@@ -193,7 +193,7 @@ class Wp_Customizer
      * Register all of the hooks related to the public-facing functionality
      * of the plugin.
      *
-     * @since    1.0.9
+     * @since    1.1.0
      * @access   private
      */
     private function define_public_hooks()
@@ -208,7 +208,7 @@ class Wp_Customizer
      * Register all of the hooks related to the public-facing functionality
      * of the plugin.
      *
-     * @since    1.0.9
+     * @since    1.1.0
      * @access   private
      */
     private function define_api_hooks()
@@ -234,12 +234,14 @@ class Wp_Customizer
 
         $this->loader->add_filter('rwmb_meta_boxes', $plugin_api, 'post_register_meta_boxes');
         $this->loader->add_action('template_redirect', $plugin_api, 'woo_custom_redirect_after_purchase');
+
+        $this->loader->add_action('rest_api_init', $plugin_api, 'add_event_review_fields');
     }
 
     /**
      * Run the loader to execute all of the hooks with WordPress.
      *
-     * @since    1.0.9
+     * @since    1.1.0
      */
     public function run()
     {
@@ -250,7 +252,7 @@ class Wp_Customizer
      * The reference to the class that orchestrates the hooks with the plugin.
      *
      * @return    Wp_Customizer_Loader    Orchestrates the hooks of the plugin.
-     * @since     1.0.9
+     * @since     1.1.0
      */
     public function get_loader(): Wp_Customizer_Loader
     {

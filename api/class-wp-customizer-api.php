@@ -4,7 +4,7 @@
  * The public-facing functionality of the plugin.
  *
  * @link       https://bitcaster.de
- * @since      1.0.9
+ * @since      1.1.0
  *
  * @package    Wp_Customizer
  * @subpackage Wp_Customizer/public
@@ -55,7 +55,7 @@ class Wp_Customizer_Api
     /**
      * The ID of this plugin.
      *
-     * @since    1.0.9
+     * @since    1.1.0
      * @access   private
      * @var      string $wp_customizer The ID of this plugin.
      */
@@ -64,7 +64,7 @@ class Wp_Customizer_Api
     /**
      * The version of this plugin.
      *
-     * @since    1.0.9
+     * @since    1.1.0
      * @access   private
      * @var      string $version The current version of this plugin.
      */
@@ -75,7 +75,7 @@ class Wp_Customizer_Api
      *
      * @param string $wp_customizer The name of the plugin.
      * @param string $version The version of this plugin.
-     * @since    1.0.9
+     * @since    1.1.0
      */
     public function __construct(string $wp_customizer, string $version)
     {
@@ -103,8 +103,10 @@ class Wp_Customizer_Api
                 $objectType,
                 array_keys($supportedObjectTypesAndMethods)
             )
-            && ($supportedMethods = $supportedObjectTypesAndMethods[$objectType])
-            && $supportedMethods && (in_array($method, $supportedMethods) || in_array('*', $supportedMethods))) {
+            && ($supportedMethods = $supportedObjectTypesAndMethods[$objectType]) && (in_array($method, $supportedMethods) || in_array(
+                    '*',
+                    $supportedMethods
+                ))) {
             if ($objectType === 'user') {
                 /** @var WP_User $currentUser */
                 $currentUser = wp_get_current_user();
@@ -149,9 +151,9 @@ class Wp_Customizer_Api
         ?WP_REST_Request $request = null
     ) {
         /** @var WP_User $currentUser */
-        if (($currentUser = wp_get_current_user()) && ($currentUserId = $currentUser->ID) && $currentUserId) {
+        if (($currentUser = wp_get_current_user()) && ($currentUserId = $currentUser->ID)) {
             if (!current_user_can('administrator')) {
-                if (isset($args['meta_query']) && ($metaQuery = $args['meta_query']) && $metaQuery) {
+                if (isset($args['meta_query']) && ($metaQuery = $args['meta_query'])) {
                     if (!in_array('_customer_user', array_column($metaQuery, 'key'))) {
                         $args['meta_query'][] =
                             [
@@ -202,8 +204,8 @@ class Wp_Customizer_Api
     ) {
         $customizerOptions = get_option('bitcaster_wp_customizer_plugin_options');
         if (isset($customizerOptions['frontend_url'], $customizerOptions['backend_url'])
-            && ($frontendUrl = $customizerOptions['frontend_url']) && $frontendUrl
-            && ($backendUrl = $customizerOptions['backend_url']) && $backendUrl) {
+            && ($frontendUrl = $customizerOptions['frontend_url'])
+            && ($backendUrl = $customizerOptions['backend_url'])) {
             $link = str_replace($backendUrl, $frontendUrl, $link);
         }
         return $link;
@@ -216,6 +218,35 @@ class Wp_Customizer_Api
         $data = $this->changeUrl($data);
         return $this->addMetaDownloadData($event, $data);
     }
+
+    public function add_event_review_fields(): void
+    {
+        $fields = ['review', 'rating'];
+        foreach ($fields as $field) {
+            register_rest_field(
+                'event_review',
+                $field,
+                [
+                    'get_callback' => function ($object) use ($field) {
+                        return get_post_meta($object['id'], $field, true);
+                    },
+                    'update_callback' => null,
+                    'schema' => null,
+                ]
+            );
+            register_meta(
+                'post',
+                $field,
+                [
+                    'type' => 'string',
+                    'description' => $field . ' of Event',
+                    'single' => true,
+                    'show_in_rest' => true
+                ]
+            );
+        }
+    }
+
 
     /**
      * Get all fields' values from list of meta boxes.
@@ -343,14 +374,36 @@ class Wp_Customizer_Api
             ],
         ];
 
+        $meta_boxes[] = [
+            'title' => esc_html__('Event Review Group', 'online-generator'),
+            'id' => 'review-group',
+            'post_types' => ['event-review'],
+            'context' => 'normal',
+            'fields' => [
+                [
+                    'type' => 'taxonomy',
+                    'name' => esc_html__('Rating', 'online-generator'),
+                    'id' => $prefix . 'rating',
+                    'taxonomy' => 'event-review-taxonomy',
+                    'field_type' => 'radio_list'
+                ],
+                [
+                    'type' => 'textarea',
+                    'name' => esc_html__('Review', 'online-generator'),
+                    'id' => $prefix . 'review',
+                    'rows' => 3,
+                ],
+            ],
+        ];
+
         return $meta_boxes;
     }
 
-    public function woo_custom_redirect_after_purchase()
+    public function woo_custom_redirect_after_purchase(): void
     {
         global $wp;
-        if (is_checkout() && !empty($wp->query_vars['order-received'])) {
-            if (($frontendUrl = $this->getFrontendUrl()) && $frontendUrl) {
+        if (!empty($wp->query_vars['order-received']) && is_checkout()) {
+            if (($frontendUrl = $this->getFrontendUrl())) {
                 $url = $frontendUrl . '/order-success?order_id=' . $wp->query_vars['order-received'];
             } else {
                 $url = 'https://app-omicron.bitcaster.dev:3337/order-success?order_id=' . $wp->query_vars['order-received'];
@@ -369,12 +422,10 @@ class Wp_Customizer_Api
     {
         $meta_boxes = rwmb_get_registry('meta_box')->get_by(['object_type' => 'post']);
         $metaFields = $this->get_values($meta_boxes, $event->ID);
-        if (is_user_logged_in()) {
-            if (isset($metaFields['private_content']) && ($privateContent = $metaFields['private_content']) && $privateContent) {
-                $data['meta']['downloads']['private'] = $privateContent;
-            }
+        if (isset($metaFields['private_content']) && ($privateContent = $metaFields['private_content']) && is_user_logged_in()) {
+            $data['meta']['downloads']['private'] = $privateContent;
         }
-        if (isset($metaFields['public_content']) && ($publicContent = $metaFields['public_content']) && $publicContent) {
+        if (isset($metaFields['public_content']) && ($metaFields['public_content'])) {
             $data['meta']['downloads']['public'] = $metaFields['public_content'];
         }
         return $data;
@@ -386,9 +437,9 @@ class Wp_Customizer_Api
      */
     private function changeUrl(array $data): array
     {
-        if (($frontendUrl = $this->getFrontendUrl()) && $frontendUrl
-            && ($backendUrl = $this->getBackendUrl()) && $backendUrl
-            && isset($data['url'])) {
+        if (isset($data['url'])
+            && ($frontendUrl = $this->getFrontendUrl())
+            && ($backendUrl = $this->getBackendUrl())) {
             $data['url'] = str_replace($backendUrl, $frontendUrl, $data['url']);
         }
         return $data;
@@ -398,7 +449,7 @@ class Wp_Customizer_Api
     {
         $customizerOptions = get_option('bitcaster_wp_customizer_plugin_options');
         if (isset($customizerOptions['frontend_url'])
-            && ($frontendUrl = $customizerOptions['frontend_url']) && $frontendUrl) {
+            && ($frontendUrl = $customizerOptions['frontend_url'])) {
             return $frontendUrl;
         }
         return null;
@@ -408,7 +459,7 @@ class Wp_Customizer_Api
     {
         $customizerOptions = get_option('bitcaster_wp_customizer_plugin_options');
         if (isset($customizerOptions['backend_url'])
-            && ($backendUrl = $customizerOptions['backend_url']) && $backendUrl) {
+            && ($backendUrl = $customizerOptions['backend_url'])) {
             return $backendUrl;
         }
         return null;
