@@ -202,6 +202,7 @@ class Wp_Customizer
 
         $this->loader->add_action('wp_enqueue_scripts', $plugin_public, 'enqueue_styles');
         $this->loader->add_action('wp_enqueue_scripts', $plugin_public, 'enqueue_scripts');
+	    $this->loader->add_action('init', $plugin_public, 'bitcaster_wp_customizer_register_event_reviews');
     }
 
     /**
@@ -236,6 +237,7 @@ class Wp_Customizer
         $this->loader->add_action('template_redirect', $plugin_api, 'woo_custom_redirect_after_purchase');
 
         $this->loader->add_action('rest_api_init', $plugin_api, 'add_event_review_fields');
+	    $this->loader->add_action('init', $plugin_api, 'add_event_review_fields');
     }
 
     /**
