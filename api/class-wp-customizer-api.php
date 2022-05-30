@@ -4,7 +4,7 @@
  * The public-facing functionality of the plugin.
  *
  * @link       https://bitcaster.de
- * @since      1.1.2
+ * @since      1.1.3
  *
  * @package    Wp_Customizer
  * @subpackage Wp_Customizer/public
@@ -55,7 +55,7 @@ class Wp_Customizer_Api
     /**
      * The ID of this plugin.
      *
-     * @since    1.1.2
+     * @since    1.1.3
      * @access   private
      * @var      string $wp_customizer The ID of this plugin.
      */
@@ -64,7 +64,7 @@ class Wp_Customizer_Api
     /**
      * The version of this plugin.
      *
-     * @since    1.1.2
+     * @since    1.1.3
      * @access   private
      * @var      string $version The current version of this plugin.
      */
@@ -75,7 +75,7 @@ class Wp_Customizer_Api
      *
      * @param string $wp_customizer The name of the plugin.
      * @param string $version The version of this plugin.
-     * @since    1.1.2
+     * @since    1.1.3
      */
     public function __construct(string $wp_customizer, string $version)
     {
@@ -408,7 +408,7 @@ class Wp_Customizer_Api
     {
         global $wp;
         if (!empty($wp->query_vars['order-received']) && is_checkout()) {
-            if (($frontendUrl = $this->getFrontendUrl())) {
+            if (($frontendUrl = self::getFrontendUrl())) {
                 $url = $frontendUrl . '/order-success?order_id=' . $wp->query_vars['order-received'];
             } else {
                 $url = 'https://app-omicron.bitcaster.dev:3337/order-success?order_id=' . $wp->query_vars['order-received'];
@@ -443,14 +443,14 @@ class Wp_Customizer_Api
     private function changeUrl(array $data): array
     {
         if (isset($data['url'])
-            && ($frontendUrl = $this->getFrontendUrl())
+            && ($frontendUrl = self::getFrontendUrl())
             && ($backendUrl = $this->getBackendUrl())) {
             $data['url'] = str_replace($backendUrl, $frontendUrl, $data['url']);
         }
         return $data;
     }
 
-    private function getFrontendUrl(): ?string
+    public static function getFrontendUrl(): ?string
     {
         $customizerOptions = get_option('bitcaster_wp_customizer_plugin_options');
         if (isset($customizerOptions['frontend_url'])

@@ -4,7 +4,7 @@
  * The admin-specific functionality of the plugin.
  *
  * @link       https://bitcaster.de
- * @since      1.1.2
+ * @since      1.1.3
  *
  * @package    Wp_Customizer
  * @subpackage Wp_Customizer/admin
@@ -26,7 +26,7 @@ class Wp_Customizer_Admin
     /**
      * The ID of this plugin.
      *
-     * @since    1.1.2
+     * @since    1.1.3
      * @access   private
      * @var      string $wp_customizer The ID of this plugin.
      */
@@ -35,7 +35,7 @@ class Wp_Customizer_Admin
     /**
      * The version of this plugin.
      *
-     * @since    1.1.2
+     * @since    1.1.3
      * @access   private
      * @var      string $version The current version of this plugin.
      */
@@ -46,7 +46,7 @@ class Wp_Customizer_Admin
      *
      * @param string $wp_customizer The name of this plugin.
      * @param string $version The version of this plugin.
-     * @since    1.1.2
+     * @since    1.1.3
      */
     public function __construct(string $wp_customizer, string $version)
     {
@@ -57,7 +57,7 @@ class Wp_Customizer_Admin
     /**
      * Register the stylesheets for the admin area.
      *
-     * @since    1.1.2
+     * @since    1.1.3
      */
     public function enqueue_styles()
     {
@@ -84,7 +84,7 @@ class Wp_Customizer_Admin
     /**
      * Register the JavaScript for the admin area.
      *
-     * @since    1.1.2
+     * @since    1.1.3
      */
     public function enqueue_scripts()
     {
