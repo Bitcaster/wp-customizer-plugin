@@ -4,7 +4,7 @@
  * The public-facing functionality of the plugin.
  *
  * @link       https://bitcaster.de
- * @since      1.1.3
+ * @since      1.1.4
  *
  * @package    Wp_Customizer
  * @subpackage Wp_Customizer/public
@@ -25,7 +25,7 @@ class Wp_Customizer_Public {
 	/**
 	 * The ID of this plugin.
 	 *
-	 * @since    1.1.3
+	 * @since    1.1.4
 	 * @access   private
 	 * @var      string $wp_customizer The ID of this plugin.
 	 */
@@ -34,7 +34,7 @@ class Wp_Customizer_Public {
 	/**
 	 * The version of this plugin.
 	 *
-	 * @since    1.1.3
+	 * @since    1.1.4
 	 * @access   private
 	 * @var      string $version The current version of this plugin.
 	 */
@@ -46,7 +46,7 @@ class Wp_Customizer_Public {
 	 * @param string $wp_customizer The name of the plugin.
 	 * @param string $version The version of this plugin.
 	 *
-	 * @since    1.1.3
+	 * @since    1.1.4
 	 */
 	public function __construct( string $wp_customizer, string $version ) {
 		$this->wp_customizer = $wp_customizer;
@@ -56,7 +56,7 @@ class Wp_Customizer_Public {
 	/**
 	 * Register the stylesheets for the public-facing side of the site.
 	 *
-	 * @since    1.1.3
+	 * @since    1.1.4
 	 */
 	public function enqueue_styles() {
 		/**
@@ -82,7 +82,7 @@ class Wp_Customizer_Public {
 	/**
 	 * Register the JavaScript for the public-facing side of the site.
 	 *
-	 * @since    1.1.3
+	 * @since    1.1.4
 	 */
 	public function enqueue_scripts() {
 		/**
